@@ -8,7 +8,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import fileUpload from "express-fileupload";
 
-const reactBuildDirectory = "../droplet-client/build";
+let reactBuildDirectory = "../droplet-client/build";
 const app = express();
 
 app.set("port", process.env.PORT || 80);
@@ -23,6 +23,7 @@ app.use(express.static(reactBuildDirectory));
 
 app.get("/", function(request, response) {
   response.sendFile("index.html", { root: reactBuildDirectory });
+  response.sendFile("Hello World");
 });
 
 app.listen(app.get("port"), function() {
