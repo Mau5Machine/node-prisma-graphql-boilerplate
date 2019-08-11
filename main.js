@@ -1,28 +1,33 @@
 require("dotenv").config();
+const Query = require("./src/resolvers/Query");
+const Mutation = require("./src/resolvers/Mutation");
+const User = require("./src/resolvers/User");
+const Link = require("./src/resolvers/Link");
+const Subscription = require("./src/resolvers/Subscription");
+const Vote = require("./src/resolvers/Vote");
 import { prisma } from "./src/generated/prisma-client";
 import { GraphQLServer } from "graphql-yoga";
 
 const resolvers = {
-  Query: {
-    info: () => `This is the API for a simple`,
-    feed: (root, args, context, info) => {
-      return context.prisma.links();
-    }
-  },
-  Mutation: {
-    post: (root, args, context) => {
-      return context.prisma.createLink({
-        url: args.url,
-        description: args.description
-      });
-    }
-  }
+  Query,
+  Mutation,
+  Subscription,
+  User,
+  Link,
+  Vote
 };
 
 const server = new GraphQLServer({
   typeDefs: "./src/schema.graphql",
   resolvers,
-  context: { prisma }
+  context: request => {
+    return {
+      ...request,
+      prisma
+    };
+  }
 });
 
-server.start(() => console.log(`Server is running on http://localhost:${process.env.PORT}`));
+server.start(() =>
+  console.log(`Server is running on http://localhost:${process.env.PORT}`)
+);
