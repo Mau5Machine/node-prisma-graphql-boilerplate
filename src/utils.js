@@ -12,6 +12,12 @@ function getUserId(context) {
   throw new Error("Not authenticated");
 }
 
+exports.errorType = {
+  LOGIN: {
+    message: "Please check the username and password",
+    statusCode: 400
+  }
+};
 module.exports = {
   APP_SECRET,
   getUserId
