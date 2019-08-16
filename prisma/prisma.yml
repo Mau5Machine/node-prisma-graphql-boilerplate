@@ -3,7 +3,7 @@ endpoint: ${env:PRISMA_ENDPOINT}
 # Points to the file that contains your datamodel
 datamodel: datamodel.prisma
 # Setting the service secret for security
-# secret: RandomKey9500
+# secret: __SECRET HERE__
 # Specifies language & location for the generated Prisma client
 generate:
   - generator: javascript-client
