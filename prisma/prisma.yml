@@ -1,7 +1,9 @@
 # The HTTP endpoint for your Prisma API
-endpoint: http://localhost:4466
+endpoint: ${env:PRISMA_ENDPOINT}
 # Points to the file that contains your datamodel
 datamodel: datamodel.prisma
+# Setting the service secret for security
+# secret: RandomKey9500
 # Specifies language & location for the generated Prisma client
 generate:
   - generator: javascript-client
